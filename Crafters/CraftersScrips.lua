@@ -139,68 +139,11 @@ SkystellToolsUnlocked       = Config.Get("SkystellToolsUnlocked")
 -- you have in game.
 ScripExchangeItems = {
     {
-        itemName        = "Mason's Abrasive",
-        categoryMenu    = 1,
-        subcategoryMenu = 9 + (SkystellToolsUnlocked and 1 or 0),
-        listIndex       = 0,
-        price           = 500
-    },
-    {
-        itemName        = "Condensed Solution",
-        categoryMenu    = 1,
-        subcategoryMenu = 10 + (SkystellToolsUnlocked and 1 or 0),
-        listIndex       = 10,
-        price           = 125
-    },
-    {
-        itemName        = "Crafter's Competence Materia XII",
-        categoryMenu    = 2,
-        subcategoryMenu = 2,
-        listIndex       = 0,
-        price           = 500
-    },
-    {
-        itemName        = "Crafter's Cunning Materia XII",
-        categoryMenu    = 2,
-        subcategoryMenu = 2,
-        listIndex       = 1,
-        price           = 500
-    },
-    {
-        itemName        = "Crafter's Command Materia XII",
-        categoryMenu    = 2,
+        itemName        = "巨匠魔晶石十二型",
+        categoryMenu    = 3,
         subcategoryMenu = 2,
         listIndex       = 2,
         price           = 500
-    },
-    {
-        itemName        = "Crafter's Competence Materia XI",
-        categoryMenu    = 2,
-        subcategoryMenu = 1,
-        listIndex       = 0,
-        price           = 250
-    },
-    {
-        itemName        = "Crafter's Cunning Materia XI",
-        categoryMenu    = 2,
-        subcategoryMenu = 1,
-        listIndex       = 1,
-        price           = 250
-    },
-    {
-        itemName        = "Crafter's Command Materia XI",
-        categoryMenu    = 2,
-        subcategoryMenu = 1,
-        listIndex       = 2,
-        price           = 250
-    },
-    {
-        itemName        = "Artful Afflatus Ring",
-        categoryMenu    = 0,
-        subcategoryMenu = 10,
-        listIndex       = 24,
-        price           = 75,
-        oneAtATime      = true
     }
 }
 
