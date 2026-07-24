@@ -30,10 +30,10 @@ configs:
     is_choice: true
     choices: ["Inn", "Home", "None"]
   HubCity:
-    default: Solution Nine
+    default: 九號解決方案
     description: Main city to use as a hub for turn-ins and purchases.
     is_choice: true
-    choices: ["Ul'dah", "Limsa", "Gridania", "Solution Nine"]
+    choices: ["Ul'dah", "Limsa", "Gridania", "九號解決方案"]
   Potion:
     default: false
     description: Use Potion (Supports only Superior Spiritbond Potion <hq>)
@@ -369,7 +369,7 @@ HubCities = {
         scripExchange = { x = 147.73, y = 4, z = -18.19, requiresAethernet = true }
     },
     {
-        zoneName = "Solution Nine",
+        zoneName = "九號解決方案",
         zoneId = 1186,
         aethernet = {
             aethernetZoneId = 1186,
