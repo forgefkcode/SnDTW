@@ -33,7 +33,7 @@ configs:
     default: 九號解決方案
     description: Main city to use as a hub for turn-ins and purchases.
     is_choice: true
-    choices: ["Ul'dah", "Limsa", "Gridania", "九號解決方案"]
+    choices: ["沙都", "海都", "森都", "九號解決方案"]
   Potion:
     default: false
     description: Use Potion (Supports only Superior Spiritbond Potion <hq>)
@@ -268,7 +268,7 @@ OrangeScripRecipes = {
         className  = "Culinarian",
         classId    = 15,
         itemName   = "Rarefied Tacos de Carne Asada",
-        itemId     = 44232,
+        itemId     = 544232,
         recipeId   = 35829
     }
 }
@@ -336,7 +336,7 @@ PurpleScripRecipes = {
 
 HubCities = {
     {
-        zoneName = "Limsa",
+        zoneName = "海都",
         zoneId = 129,
         aethernet = {
             aethernetZoneId = 129,
@@ -347,7 +347,7 @@ HubCities = {
         scripExchange = { x = -258.52585, y = 16.2, z = 40.65883, requiresAethernet = true }
     },
     {
-        zoneName = "Gridania",
+        zoneName = "森都",
         zoneId = 132,
         aethernet = {
             aethernetZoneId = 133,
@@ -358,7 +358,7 @@ HubCities = {
         scripExchange = { x = 142.15, y = 13.74, z = -105.39, requiresAethernet = true }
     },
     {
-        zoneName = "Ul'dah",
+        zoneName = "沙都",
         zoneId = 130,
         aethernet = {
             aethernetZoneId = 131,
@@ -632,7 +632,7 @@ end
 function GoToHubCity()
     if not Player.Available then
         yield("/wait 1")
-    elseif not Svc.ClientState.TerritoryType == SelectedHubCity.zoneId then
+    elseif Svc.ClientState.TerritoryType ~= SelectedHubCity.zoneId then
         TeleportTo(SelectedHubCity.aetheryte)
     else
         State = CharacterState.ready
@@ -656,12 +656,12 @@ function TurnIn()
             State = CharacterState.ready
             Dalamud.Log("[CraftersScrips] State Change: Ready")
         end
-    elseif not Svc.ClientState.TerritoryType == SelectedHubCity.zoneId and
-        (not SelectedHubCity.scripExchange.requiresAethernet or (SelectedHubCity.scripExchange.requiresAethernet and not Svc.ClientState.TerritoryType == SelectedHubCity.aethernet.aethernetZoneId))
+    elseif Svc.ClientState.TerritoryType ~= SelectedHubCity.zoneId and
+        (not SelectedHubCity.scripExchange.requiresAethernet or (SelectedHubCity.scripExchange.requiresAethernet and Svc.ClientState.TerritoryType ~= SelectedHubCity.aethernet.aethernetZoneId))
     then
         State = CharacterState.goToHubCity
         Dalamud.Log("[CraftersScrips] State Change: GoToHubCity")
-    elseif SelectedHubCity.scripExchange.requiresAethernet and (not Svc.ClientState.TerritoryType == SelectedHubCity.aethernet.aethernetZoneId or
+    elseif SelectedHubCity.scripExchange.requiresAethernet and (Svc.ClientState.TerritoryType ~= SelectedHubCity.aethernet.aethernetZoneId or
         GetDistanceToPoint(SelectedHubCity.scripExchange.x, SelectedHubCity.scripExchange.y, SelectedHubCity.scripExchange.z) > DistanceBetween(SelectedHubCity.aethernet.x, SelectedHubCity.aethernet.y, SelectedHubCity.aethernet.z, SelectedHubCity.scripExchange.x, SelectedHubCity.scripExchange.y, SelectedHubCity.scripExchange.z) + 10) then
         if not IPC.Lifestream.IsBusy() and not Player.IsBusy then
             Dalamud.Log("[CraftersScrips] /li "..SelectedHubCity.aethernet.aethernetName)
@@ -721,13 +721,13 @@ function ScripExchange()
             State = CharacterState.ready
             Dalamud.Log("[CraftersScrips] State Change: Ready")
         end
-    elseif not Svc.ClientState.TerritoryType == SelectedHubCity.zoneId and
-        (not SelectedHubCity.scripExchange.requiresAethernet or (SelectedHubCity.scripExchange.requiresAethernet and not Svc.ClientState.TerritoryType == SelectedHubCity.aethernet.aethernetZoneId))
+    elseif Svc.ClientState.TerritoryType ~= SelectedHubCity.zoneId and
+        (not SelectedHubCity.scripExchange.requiresAethernet or (SelectedHubCity.scripExchange.requiresAethernet and Svc.ClientState.TerritoryType ~= SelectedHubCity.aethernet.aethernetZoneId))
     then
         SelectTurnInPage = false
         State = CharacterState.goToHubCity
         Dalamud.Log("[CraftersScrips] State Change: GoToHubCity")
-    elseif SelectedHubCity.scripExchange.requiresAethernet and (not Svc.ClientState.TerritoryType == SelectedHubCity.aethernet.aethernetZoneId or
+    elseif SelectedHubCity.scripExchange.requiresAethernet and (Svc.ClientState.TerritoryType ~= SelectedHubCity.aethernet.aethernetZoneId or
         GetDistanceToPoint(SelectedHubCity.scripExchange.x, SelectedHubCity.scripExchange.y, SelectedHubCity.scripExchange.z) > DistanceBetween(SelectedHubCity.aethernet.x, SelectedHubCity.aethernet.y, SelectedHubCity.aethernet.z, SelectedHubCity.scripExchange.x, SelectedHubCity.scripExchange.y, SelectedHubCity.scripExchange.z) + 10) then
         if not IPC.Lifestream.IsBusy() then
             IPC.Lifestream.ExecuteCommand(SelectedHubCity.aethernet.aethernetName)
@@ -805,12 +805,12 @@ function ProcessRetainers()
                     yield("/wait 1")
                 end
             end
-        elseif not Dalamud.Log("[CraftersScrips] is in hub city zone?") and not Svc.ClientState.TerritoryType == SelectedHubCity.zoneId and
-            (not SelectedHubCity.scripExchange.requiresAethernet or (SelectedHubCity.scripExchange.requiresAethernet and not Svc.ClientState.TerritoryType == SelectedHubCity.aethernet.aethernetZoneId))
+        elseif not Dalamud.Log("[CraftersScrips] is in hub city zone?") and Svc.ClientState.TerritoryType ~= SelectedHubCity.zoneId and
+            (not SelectedHubCity.scripExchange.requiresAethernet or (SelectedHubCity.scripExchange.requiresAethernet and Svc.ClientState.TerritoryType ~= SelectedHubCity.aethernet.aethernetZoneId))
         then
             TeleportTo(SelectedHubCity.aetheryte)
         elseif not Dalamud.Log("[CraftersScrips] use aethernet?") and
-            SelectedHubCity.retainerBell.requiresAethernet and (not Svc.ClientState.TerritoryType == SelectedHubCity.aethernet.aethernetZoneId or
+            SelectedHubCity.retainerBell.requiresAethernet and (Svc.ClientState.TerritoryType ~= SelectedHubCity.aethernet.aethernetZoneId or
             (GetDistanceToPoint(SelectedHubCity.retainerBell.x, SelectedHubCity.retainerBell.y, SelectedHubCity.retainerBell.z) > (DistanceBetween(SelectedHubCity.aethernet.x, SelectedHubCity.aethernet.y, SelectedHubCity.aethernet.z, SelectedHubCity.retainerBell.x, SelectedHubCity.retainerBell.y, SelectedHubCity.retainerBell.z) + 10)))
         then
             if not IPC.Lifestream.IsBusy() then
