@@ -22,7 +22,7 @@ configs:
     default: 1
     description: Id of Artisan list for crafting all the intermediate materials (eg black star, claro walnut lumber, etc.).
   ItemToBuy:
-    default: Crafter's Command Materia XII
+    default: 巨匠魔晶石十二型
     description: Name of the item to purchase using scrips.
   HomeCommand:
     default: Inn
