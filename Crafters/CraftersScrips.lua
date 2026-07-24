@@ -340,7 +340,7 @@ HubCities = {
         zoneId = 129,
         aethernet = {
             aethernetZoneId = 129,
-            aethernetName   = "Hawkers' Alley",
+            aethernetName   = "市場 (國際街廣場)",
             x = -213.61108, y = 16.739136, z = 51.80432
         },
         retainerBell  = { x = -124.703, y = 18, z = 19.887, requiresAethernet = false },
@@ -351,7 +351,7 @@ HubCities = {
         zoneId = 132,
         aethernet = {
             aethernetZoneId = 133,
-            aethernetName   = "Leatherworkers' Guild & Shaded Bower",
+            aethernetName   = "市場 (皮革師行會前)",
             x = 131.9447, y = 4.714966, z = -29.800903
         },
         retainerBell  = { x = 168.72, y = 15.5, z = -100.06, requiresAethernet = true },
@@ -362,7 +362,7 @@ HubCities = {
         zoneId = 130,
         aethernet = {
             aethernetZoneId = 131,
-            aethernetName   = "Sapphire Avenue Exchange",
+            aethernetName   = "市場 (藍玉大街國際市場)",
             x = 101, y = 9, z = -112
         },
         retainerBell  = { x = 146.760, y = 4, z = -42.992, requiresAethernet = true },
@@ -373,7 +373,7 @@ HubCities = {
         zoneId = 1186,
         aethernet = {
             aethernetZoneId = 1186,
-            aethernetName   = "Nexus Arcade",
+            aethernetName   = "聯合商城",
             x = -161, y = -1, z = 21
         },
         retainerBell  = { x = -152.465, y = 0.660, z = -13.557, requiresAethernet = true },
@@ -683,7 +683,7 @@ function TurnIn()
         end
 
         if not Addons.GetAddon("CollectablesShop").Ready then
-            local appraiser = Entity.GetEntityByName("Collectable Appraiser")
+            local appraiser = Entity.GetEntityByName("收藏品交易員")
             if appraiser then
                 appraiser:SetAsTarget()
                 appraiser:Interact()
@@ -763,7 +763,7 @@ function ScripExchange()
         yield("/callback InclusionShop true 14 "..SelectedItemToBuy.listIndex.." "..qty)
         yield("/wait 1")
     else
-        local scripExchange = Entity.GetEntityByName("Scrip Exchange")
+        local scripExchange = Entity.GetEntityByName("工票交易員")
         if scripExchange then
             scripExchange:SetAsTarget()
             scripExchange:Interact()
@@ -783,7 +783,7 @@ function ProcessRetainers()
             Dalamud.Log("[CraftersScrips] State Change: Ready")
         end
     else
-        local summoningBell = Entity.GetEntityByName("Summoning Bell")
+        local summoningBell = Entity.GetEntityByName("傳喚鈴")
         if summoningBell then
             summoningBell:SetAsTarget()
         end
