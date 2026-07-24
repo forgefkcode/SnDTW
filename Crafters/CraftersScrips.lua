@@ -283,8 +283,8 @@ HubCities = {
         zoneId = 129,
         aethernet = {
             aethernetZoneId = 129,
-            aethernetName   = "市場",
-            x = -213.61108, y = 16.739136, z = 51.80432
+            aethernetName   = "巴術士行會前",
+            x = -335.1645, y = 12.6192, z = 56.3819
         },
         retainerBell  = { x = -124.703, y = 18, z = 19.887, requiresAethernet = false },
         scripExchange = { x = -258.52585, y = 16.2, z = 40.65883, requiresAethernet = true }
