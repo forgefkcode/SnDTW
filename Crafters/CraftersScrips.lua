@@ -283,7 +283,7 @@ HubCities = {
         zoneId = 129,
         aethernet = {
             aethernetZoneId = 129,
-            aethernetName   = "市場 (國際街廣場)",
+            aethernetName   = "市場",
             x = -213.61108, y = 16.739136, z = 51.80432
         },
         retainerBell  = { x = -124.703, y = 18, z = 19.887, requiresAethernet = false },
@@ -294,7 +294,7 @@ HubCities = {
         zoneId = 132,
         aethernet = {
             aethernetZoneId = 133,
-            aethernetName   = "市場 (皮革師行會前)",
+            aethernetName   = "市場",
             x = 131.9447, y = 4.714966, z = -29.800903
         },
         retainerBell  = { x = 168.72, y = 15.5, z = -100.06, requiresAethernet = true },
@@ -305,7 +305,7 @@ HubCities = {
         zoneId = 130,
         aethernet = {
             aethernetZoneId = 131,
-            aethernetName   = "市場 (藍玉大街國際市場)",
+            aethernetName   = "市場",
             x = 101, y = 9, z = -112
         },
         retainerBell  = { x = 146.760, y = 4, z = -42.992, requiresAethernet = true },
