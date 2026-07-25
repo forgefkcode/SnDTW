@@ -66,7 +66,7 @@ Updated by: Minnu, Ice, Allison
 Crafts orange scrip item matching whatever class you're on, turns it in, buys
 stuff, repeat.
 
-    -> 2.0.9    Use Svc.Objects.LocalPlayer for player position and job checks
+    -> 2.0.9    Use Svc.ClientState.LocalPlayer for player position and job checks
     -> 2.0.8    Ensure correct crafter job is equipped before turn-ins
     -> 2.0.6    Bug Fixes
     -> 2.0.5    Updated config and Made `HobCity` a dropdown selectable
@@ -363,7 +363,7 @@ function TeleportTo(aetheryteName)
 end
 
 function GetDistanceToPoint(dX, dY, dZ)
-    local player = Svc.Objects.LocalPlayer
+    local player = Svc.ClientState.LocalPlayer
     if not player or not player.Position then
         return math.huge
     end
@@ -488,7 +488,7 @@ function HasPlugin(name)
 end
 
 function EnsureCrafterJob()
-    local player = Svc.Objects.LocalPlayer
+    local player = Svc.ClientState.LocalPlayer
     if not player then
         return false
     end
@@ -671,14 +671,14 @@ function ScripExchange()
         State = CharacterState.goToHubCity
         Dalamud.Log("[CraftersScrips] State Change: GoToHubCity")
     elseif SelectedHubCity.scripExchange.requiresAethernet and (Svc.ClientState.TerritoryType ~= SelectedHubCity.aethernet.aethernetZoneId or
-        GetDistanceToPoint(SelectedHubCity.scripExchange.x, SelectedHubCity.scripExchange.y, SelectedHubCity.scripExchange.z) > DistanceBetween(SelectedHubCity.aethernet.x, SelectedHubCity.aethernet.y, SelectedHubCity.aethernet.z, SelectedHubCity.scripExchange.x, SelectedHubCity.scripExchange.y, SelectedHubCity.scripExchange.z) + 10) then
+        (SelectedHubCity.scripExchange.x, SelectedHubCity.scripExchange.y, SelectedHubCity.scripExchange.z) > DistanceBetween(SelectedHubCity.aethernet.x, SelectedHubCity.aethernet.y, SelectedHubCity.aethernet.z, SelectedHubCity.scripExchange.x, SelectedHubCity.scripExchange.y, SelectedHubCity.scripExchange.z) + 10) then
         if not IPC.Lifestream.IsBusy() then
             IPC.Lifestream.ExecuteCommand(SelectedHubCity.aethernet.aethernetName)
         end
         yield("/wait 3")
     elseif Addons.GetAddon("TeleportTown").Ready then
         yield("/callback TeleportTown true -1")
-    elseif GetDistanceToPoint(SelectedHubCity.scripExchange.x, SelectedHubCity.scripExchange.y, SelectedHubCity.scripExchange.z) > 1 then
+    elseif (SelectedHubCity.scripExchange.x, SelectedHubCity.scripExchange.y, SelectedHubCity.scripExchange.z) > 1 then
         if not IPC.vnavmesh.PathfindInProgress() and not IPC.vnavmesh.IsRunning() then
             yield("/wait 3")
             Dalamud.Log("[CraftersScrips] Path not running")
@@ -754,7 +754,7 @@ function ProcessRetainers()
             TeleportTo(SelectedHubCity.aetheryte)
         elseif not Dalamud.Log("[CraftersScrips] use aethernet?") and
             SelectedHubCity.retainerBell.requiresAethernet and (Svc.ClientState.TerritoryType ~= SelectedHubCity.aethernet.aethernetZoneId or
-            (GetDistanceToPoint(SelectedHubCity.retainerBell.x, SelectedHubCity.retainerBell.y, SelectedHubCity.retainerBell.z) > (DistanceBetween(SelectedHubCity.aethernet.x, SelectedHubCity.aethernet.y, SelectedHubCity.aethernet.z, SelectedHubCity.retainerBell.x, SelectedHubCity.retainerBell.y, SelectedHubCity.retainerBell.z) + 10)))
+            ((SelectedHubCity.retainerBell.x, SelectedHubCity.retainerBell.y, SelectedHubCity.retainerBell.z) > (DistanceBetween(SelectedHubCity.aethernet.x, SelectedHubCity.aethernet.y, SelectedHubCity.aethernet.z, SelectedHubCity.retainerBell.x, SelectedHubCity.retainerBell.y, SelectedHubCity.retainerBell.z) + 10)))
         then
             if not IPC.Lifestream.IsBusy() then
                 IPC.Lifestream.ExecuteCommand(SelectedHubCity.aethernet.aethernetName)
@@ -763,7 +763,7 @@ function ProcessRetainers()
         elseif not Dalamud.Log("[CraftersScrips] Close teleport town") and Addons.GetAddon("TeleportTown").Ready then
             Dalamud.Log("TeleportTown open")
             yield("/callback TeleportTown false -1")
-        elseif not Dalamud.Log("[CraftersScrips] Move to summoning bell") and GetDistanceToPoint(SelectedHubCity.retainerBell.x, SelectedHubCity.retainerBell.y, SelectedHubCity.retainerBell.z) > 1 then
+        elseif not Dalamud.Log("[CraftersScrips] Move to summoning bell") and (SelectedHubCity.retainerBell.x, SelectedHubCity.retainerBell.y, SelectedHubCity.retainerBell.z) > 1 then
             if not IPC.vnavmesh.PathfindInProgress() and not  IPC.vnavmesh.IsRunning() then
                 Dalamud.Log("[CraftersScrips] Path not running")
                 IPC.vnavmesh.PathfindAndMoveTo(Vector3(SelectedHubCity.retainerBell.x, SelectedHubCity.retainerBell.y, SelectedHubCity.retainerBell.z), false)
