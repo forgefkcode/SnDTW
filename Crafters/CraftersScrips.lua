@@ -22,7 +22,7 @@ configs:
     default: 1
     description: Id of Artisan list for crafting all the intermediate materials (eg black star, claro walnut lumber, etc.).
   ItemToBuy:
-    default: 巨匠魔晶石十二型
+    default: 巨匠魔晶石拾貳型
     description: Name of the item to purchase using scrips.
   HomeCommand:
     default: Inn
@@ -139,8 +139,8 @@ SkystellToolsUnlocked       = Config.Get("SkystellToolsUnlocked")
 -- you have in game.
 ScripExchangeItems = {
     {
-        itemName        = "巨匠魔晶石十二型",
-        categoryMenu    = 3,
+        itemName        = "巨匠魔晶石拾貳型",
+        categoryMenu    = 2,
         subcategoryMenu = 2,
         listIndex       = 2,
         price           = 500
@@ -210,7 +210,7 @@ OrangeScripRecipes = {
     {
         className  = "Culinarian",
         classId    = 15,
-        itemName   = "Rarefied Tacos de Carne Asada",
+        itemName   = "收藏用烤牛肉塔可餅",
         itemId     = 544232,
         recipeId   = 35829
     }
@@ -973,4 +973,5 @@ while not StopFlag do
     end
     yield("/wait 0.1")
 end
+
 
